@@ -33,18 +33,18 @@ public class CompiladorDibujos {
         f.setSize(1000, 600);
         f.setLocation(20, 20);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Panel panel;
+        PanelDibujo panel;
         
         try {
             /*
-            FileWriter prub= new FileWriter("prueba.txt");
+            FileWriter prub= new FileWriter("prueba2.txt");
             prub.append("hola");
             prub.close();
             */
             
             text analizador= new text(new InputStreamReader(new FileInputStream("code.txt")));
             Dibujo dib=analizador.Programa();
-            panel= new Panel(dib);
+            panel= new PanelDibujo(dib);
             f.add(panel);    
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CompiladorDibujos.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,9 +58,9 @@ public class CompiladorDibujos {
     
 }
 
-class Panel extends JPanel{
+class PanelDibujo extends JPanel{
     Dibujo dibujo;
-    public Panel(Dibujo dib){
+    public PanelDibujo(Dibujo dib){
         dibujo=dib;
     }
 

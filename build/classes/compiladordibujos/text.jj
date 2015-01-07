@@ -1,6 +1,6 @@
 
 options {
-	LOOKAHEAD=2;
+	LOOKAHEAD=3;
 	
 } 
 
@@ -80,6 +80,12 @@ Dibujo Principal() :
 			System.out.println("Se encontro un rectangulo"); 
 			dibujo.agregarDibujable(rect);
 		}
+		|<ABREETI><CIRCULO><CIERRAETI> { Circulo circ= new Circulo(); }
+			Atributos(circ)
+		<ABREETI><CIERRA><CIRCULO><CIERRAETI>{
+			System.out.println("Se encontro un circulo"); 
+			dibujo.agregarDibujable(circ);
+		}
 	)*
 	{ 
 		return dibujo;
@@ -113,11 +119,32 @@ void Atributos(Dibujable d):
 		<ABREETI><CIERRA><COLOR><CIERRAETI>
 		
 		|<ABREETI><RADIO><CIERRAETI>
-			<NUMBER>
-		<ABREETI><CIERRA><RADIO><CIERRAETI> { /*if( ! d instanceof Circulo )*/ System.out.println("Se encontro una etiqueta de radio en un rectangulo, sera ignorada"); }
-		|<ABREETI><TAM><CIERRAETI><NUMBER><ABREETI><CIERRA><TAM><CIERRAETI> {System.out.println("Se encontro una etiqueta de tamaño en un rectangulo, sera ignorada"); }
-		|<ABREETI><FONDO><CIERRAETI><TEXT><ABREETI><CIERRA><FONDO><CIERRAETI> {System.out.println("Se encontro una etiqueta de fondo en un rectangulo, sera ignorada"); }
-		|<ABREETI><FUENTE><CIERRAETI><TEXT><ABREETI><CIERRA><FUENTE><CIERRAETI>{System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada"); }
+			t=<NUMBER> {
+				if( d instanceof Circulo ){
+					((Circulo)d).setRadio(Integer.parseInt(t.toString()));
+				}else System.out.println("Se encontro una etiqueta de radio en una figura que no es un circulo, sera ignorada"); 
+			}
+		<ABREETI><CIERRA><RADIO><CIERRAETI> 
+		|<ABREETI><TAM><CIERRAETI>
+			t=<NUMBER> {
+				//if(d instanceof Texto)
+			}
+		<ABREETI><CIERRA><TAM><CIERRAETI> {System.out.println("Se encontro una etiqueta de tamaño en un objeto que no es texto, sera ignorada"); }
+		|<ABREETI><FONDO><CIERRAETI>
+			t=<TEXT> {
+				boolean f= (t.toString().equals("si") || t.toString().equals("1")) ? true: false;
+				if( d instanceof Circulo){
+					((Circulo)d).setFondo(f);
+				} else if(d instanceof Rectangulo){
+					((Rectangulo)d).setFondo(f);
+				}else {
+					System.out.println("Etiqueta fondo no tiene efecto sobre este objeto"); 
+				}
+			}
+		<ABREETI><CIERRA><FONDO><CIERRAETI> 
+		|<ABREETI><FUENTE><CIERRAETI>
+			t=<TEXT>
+		<ABREETI><CIERRA><FUENTE><CIERRAETI>{System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada"); }
 		|<ABREETI><TIPO><CIERRAETI><TEXT><ABREETI><CIERRA><TIPO><CIERRAETI> 
 	)+ 
 }

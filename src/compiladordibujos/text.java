@@ -31,22 +31,39 @@ class text implements textConstants {
   static final public Dibujo Principal() throws ParseException {Dibujo dibujo= new Dibujo();
     label_1:
     while (true) {
-      if (jj_2_1(2)) {
+      if (jj_2_1(3)) {
         ;
       } else {
         break label_1;
       }
-      jj_consume_token(ABREETI);
-      jj_consume_token(RECTANGULO);
-      jj_consume_token(CIERRAETI);
+      if (jj_2_2(3)) {
+        jj_consume_token(ABREETI);
+        jj_consume_token(RECTANGULO);
+        jj_consume_token(CIERRAETI);
 Rectangulo rect= new Rectangulo();
-      Atributos(rect);
-      jj_consume_token(ABREETI);
-      jj_consume_token(CIERRA);
-      jj_consume_token(RECTANGULO);
-      jj_consume_token(CIERRAETI);
+        Atributos(rect);
+        jj_consume_token(ABREETI);
+        jj_consume_token(CIERRA);
+        jj_consume_token(RECTANGULO);
+        jj_consume_token(CIERRAETI);
 System.out.println("Se encontro un rectangulo");
                         dibujo.agregarDibujable(rect);
+      } else if (jj_2_3(3)) {
+        jj_consume_token(ABREETI);
+        jj_consume_token(CIRCULO);
+        jj_consume_token(CIERRAETI);
+Circulo circ= new Circulo();
+        Atributos(circ);
+        jj_consume_token(ABREETI);
+        jj_consume_token(CIERRA);
+        jj_consume_token(CIRCULO);
+        jj_consume_token(CIERRAETI);
+System.out.println("Se encontro un circulo");
+                        dibujo.agregarDibujable(circ);
+      } else {
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     }
 {if ("" != null) return dibujo;}
         /*
@@ -61,7 +78,7 @@ System.out.println("Se encontro un rectangulo");
   static final public void Atributos(Dibujable d) throws ParseException {Token t;
     label_2:
     while (true) {
-      if (jj_2_2(2)) {
+      if (jj_2_4(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
@@ -71,7 +88,7 @@ d.setAlto( Integer.parseInt(t.toString()) );
         jj_consume_token(CIERRA);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_3(2)) {
+      } else if (jj_2_5(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
@@ -81,7 +98,7 @@ d.setAncho( Integer.parseInt(t.toString()) );
         jj_consume_token(CIERRA);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_4(2)) {
+      } else if (jj_2_6(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSX);
@@ -93,7 +110,7 @@ d.setX( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSX);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_5(2)) {
+      } else if (jj_2_7(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSY);
@@ -105,7 +122,7 @@ d.setY( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSY);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_6(2)) {
+      } else if (jj_2_8(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(COLOR);
         jj_consume_token(CIERRAETI);
@@ -115,47 +132,57 @@ d.setColor( t.toString() );
         jj_consume_token(CIERRA);
         jj_consume_token(COLOR);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_7(2)) {
+      } else if (jj_2_9(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(RADIO);
         jj_consume_token(CIERRAETI);
-        jj_consume_token(NUMBER);
+        t = jj_consume_token(NUMBER);
+if( d instanceof Circulo ){
+                                        ((Circulo)d).setRadio(Integer.parseInt(t.toString()));
+                                }else System.out.println("Se encontro una etiqueta de radio en una figura que no es un circulo, sera ignorada");
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(RADIO);
         jj_consume_token(CIERRAETI);
-/*if( ! d instanceof Circulo )*/ System.out.println("Se encontro una etiqueta de radio en un rectangulo, sera ignorada");
-      } else if (jj_2_8(2)) {
+      } else if (jj_2_10(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(TAM);
         jj_consume_token(CIERRAETI);
-        jj_consume_token(NUMBER);
+        t = jj_consume_token(NUMBER);
+
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(TAM);
         jj_consume_token(CIERRAETI);
-System.out.println("Se encontro una etiqueta de tama\u00c3\u00b1o en un rectangulo, sera ignorada");
-      } else if (jj_2_9(2)) {
+System.out.println("Se encontro una etiqueta de tama\u00c3\u00b1o en un objeto que no es texto, sera ignorada");
+      } else if (jj_2_11(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(FONDO);
         jj_consume_token(CIERRAETI);
-        jj_consume_token(TEXT);
+        t = jj_consume_token(TEXT);
+boolean f= (t.toString().equals("si") || t.toString().equals("1")) ? true: false;
+                                if( d instanceof Circulo){
+                                        ((Circulo)d).setFondo(f);
+                                } else if(d instanceof Rectangulo){
+                                        ((Rectangulo)d).setFondo(f);
+                                }else {
+                                        System.out.println("Etiqueta fondo no tiene efecto sobre este objeto");
+                                }
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(FONDO);
         jj_consume_token(CIERRAETI);
-System.out.println("Se encontro una etiqueta de fondo en un rectangulo, sera ignorada");
-      } else if (jj_2_10(2)) {
+      } else if (jj_2_12(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(FUENTE);
         jj_consume_token(CIERRAETI);
-        jj_consume_token(TEXT);
+        t = jj_consume_token(TEXT);
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(FUENTE);
         jj_consume_token(CIERRAETI);
 System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada");
-      } else if (jj_2_11(2)) {
+      } else if (jj_2_13(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(TIPO);
         jj_consume_token(CIERRAETI);
@@ -168,7 +195,7 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
         jj_consume_token(-1);
         throw new ParseException();
       }
-      if (jj_2_12(2)) {
+      if (jj_2_14(3)) {
         ;
       } else {
         break label_2;
@@ -272,70 +299,82 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
     finally { jj_save(11, xla); }
   }
 
-  static private boolean jj_3_9()
+  static private boolean jj_2_13(int xla)
  {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(FONDO)) return true;
-    return false;
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_13(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(12, xla); }
+  }
+
+  static private boolean jj_2_14(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_14(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(13, xla); }
   }
 
   static private boolean jj_3_8()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(TAM)) return true;
+    if (jj_scan_token(COLOR)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
   static private boolean jj_3_7()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(RADIO)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSY)) return true;
     return false;
   }
 
   static private boolean jj_3_6()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(COLOR)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSX)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(FONDO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
   static private boolean jj_3_5()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_4()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(ANCHO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
   static private boolean jj_3_3()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(ANCHO)) return true;
+    if (jj_scan_token(CIRCULO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
-  static private boolean jj_3_1()
+  static private boolean jj_3_10()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(RECTANGULO)) return true;
+    if (jj_scan_token(TAM)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
-  static private boolean jj_3_12()
+  static private boolean jj_3_14()
  {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_2()) {
-    jj_scanpos = xsp;
-    if (jj_3_3()) {
-    jj_scanpos = xsp;
     if (jj_3_4()) {
     jj_scanpos = xsp;
     if (jj_3_5()) {
@@ -350,7 +389,11 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
     jj_scanpos = xsp;
     if (jj_3_10()) {
     jj_scanpos = xsp;
-    if (jj_3_11()) return true;
+    if (jj_3_11()) {
+    jj_scanpos = xsp;
+    if (jj_3_12()) {
+    jj_scanpos = xsp;
+    if (jj_3_13()) return true;
     }
     }
     }
@@ -363,24 +406,54 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
     return false;
   }
 
-  static private boolean jj_3_11()
+  static private boolean jj_3_4()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(ALTO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_13()
  {
     if (jj_scan_token(ABREETI)) return true;
     if (jj_scan_token(TIPO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_12()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(FUENTE)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_1()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_2()) {
+    jj_scanpos = xsp;
+    if (jj_3_3()) return true;
+    }
     return false;
   }
 
   static private boolean jj_3_2()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(ALTO)) return true;
+    if (jj_scan_token(RECTANGULO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
-  static private boolean jj_3_10()
+  static private boolean jj_3_9()
  {
     if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(FUENTE)) return true;
+    if (jj_scan_token(RADIO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
     return false;
   }
 
@@ -404,7 +477,7 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
    private static void jj_la1_init_0() {
       jj_la1_0 = new int[] {};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[12];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[14];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -646,7 +719,7 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 14; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -665,6 +738,8 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
             case 9: jj_3_10(); break;
             case 10: jj_3_11(); break;
             case 11: jj_3_12(); break;
+            case 12: jj_3_13(); break;
+            case 13: jj_3_14(); break;
           }
         }
         p = p.next;

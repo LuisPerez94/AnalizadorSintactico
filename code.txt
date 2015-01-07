@@ -1,8 +1,16 @@
 <dibujo>
 	<rectangulo>
-		<alto>100</alto>
-		<ancho>200</ancho>
-		<fondo>no</fondo>
-		<color>azul</color>
+            <posicion:x>10</posicion:x>
+            <posicion:y>10</posicion:y>
+            <alto>80</alto>
+            <ancho>50</ancho>
+            <fondo>si</fondo>
+            <color>rojo</color>
 	</rectangulo>
+	<circulo>
+            <radio>50</radio>
+            <posicion:x>200</posicion:x>
+            <posicion:y>100</posicion:y>
+            <color>azul</color>
+	</circulo>
 </dibujo>

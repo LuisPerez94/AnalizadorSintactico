@@ -36,7 +36,7 @@ class Rectangulo implements Dibujable{
 	public void dibujar(Graphics g){
             if(getColor()!=null){
                 g.setColor(getColor());
-            }
+            } else g.setColor(Color.BLACK);
             if(isFondo()){
                 g.fillRect(getX(), getY(), getAncho(), getAlto());
             }else{
@@ -54,7 +54,6 @@ class Rectangulo implements Dibujable{
             }else{
                 codigo.append("g.drawRect(");
             }
-            codigo.append("g.fillRect(");
             codigo.append(getX()).append(", ").append(getY()).append(", ");
             codigo.append(getAncho()).append(", ").append(getAlto()); 
             codigo.append(");");
