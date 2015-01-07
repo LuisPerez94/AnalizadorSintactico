@@ -36,19 +36,18 @@ public class Circulo implements Dibujable {
     @Override
     public String codigo() {
         StringBuilder codigo= new StringBuilder();
-            /*if(color!=null){
-                g.setColor(color);
-            }*/
-            
-            if(isFondo()){
-                codigo.append("g.fillArc(");
-            }else{
-                codigo.append("g.drawArc(");
-            }
-            codigo.append(getX()).append(", ").append(getY()).append(", ");
-            codigo.append(getAncho()).append(", ").append(getAlto()); 
-            codigo.append("0,360);");
-            return codigo.toString();
+        /*if(color!=null){
+            g.setColor(color);
+        }*/
+        if(isFondo()){
+            codigo.append("g.fillArc(");
+        }else{
+            codigo.append("g.drawArc(");
+        }
+        codigo.append(getX()).append(", ").append(getY()).append(", ");
+        codigo.append(getAncho()).append(", ").append(getAlto()); 
+        codigo.append("0,360);");
+        return codigo.toString();
     }
     public void setRadio(int r){
         alto=r*2;

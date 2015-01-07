@@ -51,9 +51,13 @@ public interface textConstants {
   /** RegularExpression Id. */
   int POSY = 20;
   /** RegularExpression Id. */
-  int NUMBER = 21;
+  int POSX2 = 21;
   /** RegularExpression Id. */
-  int TEXT = 22;
+  int POSY2 = 22;
+  /** RegularExpression Id. */
+  int NUMBER = 23;
+  /** RegularExpression Id. */
+  int TEXT = 24;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -81,6 +85,8 @@ public interface textConstants {
     "\"/\"",
     "\":x\"",
     "\":y\"",
+    "\":x2\"",
+    "\":y2\"",
     "<NUMBER>",
     "<TEXT>",
     "\" \"",

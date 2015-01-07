@@ -1,16 +1,35 @@
 <dibujo>
+	<cabecera>
+		<alto>600</alto>
+		<ancho>1000</ancho>
+		<fondo>gris claro </fondo>
+	</cabecera>
 	<rectangulo>
             <posicion:x>10</posicion:x>
             <posicion:y>10</posicion:y>
             <alto>80</alto>
             <ancho>50</ancho>
             <fondo>si</fondo>
-            <color>rojo</color>
+            <color>azul</color>
 	</rectangulo>
 	<circulo>
             <radio>50</radio>
             <posicion:x>200</posicion:x>
             <posicion:y>100</posicion:y>
-            <color>azul</color>
+            <color>negro</color>
+	</circulo>
+	<linea>
+		<posicion:x>0</posicion:x>
+		<posicion:y>100</posicion:y>
+		<posicion:x2>200</posicion:x2>
+		<posicion:y2>500</posicion:y2>
+		<color>amarillo</color>
+	</linea>
+	<circulo>
+            <radio>50</radio>
+            <posicion:x>500</posicion:x>
+            <posicion:y>100</posicion:y>
+            <color>rojo</color>
+	    <fondo>si</fondo>
 	</circulo>
 </dibujo>
