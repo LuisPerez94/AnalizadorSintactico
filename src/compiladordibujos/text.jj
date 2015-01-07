@@ -1,0 +1,123 @@
+
+options {
+	LOOKAHEAD=2;
+	
+} 
+
+PARSER_BEGIN(text)
+package compiladordibujos;
+class text {
+	public static void main(String args[])throws ParseException{
+		try{
+			text analizador =new text(System.in);
+			analizador.Programa();
+			System.out.println("Se a compilado Correctamente");
+			
+		}catch(ParseException e){
+			System.out.println(e.getMessage());
+			System.out.println("Ha Ocurrido un error");
+		}
+	}
+}
+
+PARSER_END(text)
+
+TOKEN :
+{ 
+	<MAIN : "dibujo">{System.out.println("MAIN -> "+image);}	
+	| <CABECERA : "cabecera">{System.out.println("CABECERA -> "+image);}
+	| <RECTANGULO  :"rectangulo">{System.out.println("RECTANGULO -> "+image);}
+	| <CIRCULO :"circulo">{System.out.println("CIRCULO -> "+image);}
+	| <LINEA : "linea">{System.out.println("LINEA-> "+image);}
+	| <TEXTO : "texto">{System.out.println("TEXTO -> "+image);}
+	| <ALTO : "alto">{System.out.println("ALTO -> "+image);}
+	| <ANCHO : "ancho">{System.out.println("ANCHO -> "+image);}
+	| <COLOR : "color">{System.out.println("COLOR -> "+image);}
+	| <POSICION : "posicion">{System.out.println("POSICION -> "+image);}
+	| <RADIO : "radio">{System.out.println("RADIO -> " +image);}
+	| <FONDO : "fondo">{System.out.println("FONDO -> "+image);}
+	| <TIPO : "tipo">{System.out.println("TIPO -> "+image);}
+	| <FUENTE :"fuente">{System.out.println("FUENTE -> "+image);}
+	| <TAM: "tam">{System.out.println("TAM -> "+image);}
+}
+TOKEN :
+{
+ <ABREETI : "<">{System.out.println("ABREETI -> "+image);}
+| <CIERRAETI :">">{System.out.println("CIERRAETI -> "+image);}
+| <CIERRA :"/">{System.out.println("CIERRA -> "+image);	}
+| <POSX : ":x">{System.out.println("POSX ->  "+image);	}
+| <POSY : ":y">{System.out.println("POSY -> "+image);}
+}
+TOKEN : {
+	
+	<NUMBER : (["0"-"9"])+ >{System.out.println("NUMERO ->  "+image);}
+	| <TEXT : (["a"-"z","A"-"Z"])+ >{System.out.println("TEXTO ->  "+image);}
+}
+
+SKIP : {
+		" "|"\r"|"\t"|"\n"
+	}
+
+Dibujo Programa () :
+{
+	Dibujo dibujo;
+}
+{
+	<ABREETI><MAIN><CIERRAETI>
+	dibujo=Principal()
+	<ABREETI><CIERRA><MAIN><CIERRAETI><EOF> {return dibujo; }
+}
+Dibujo Principal() :
+{
+	Dibujo dibujo= new Dibujo();
+	
+}
+{
+	(
+		<ABREETI><RECTANGULO><CIERRAETI> { Rectangulo rect= new Rectangulo(); }
+			Atributos(rect) 
+		<ABREETI><CIERRA><RECTANGULO><CIERRAETI> { 
+			System.out.println("Se encontro un rectangulo"); 
+			dibujo.agregarDibujable(rect);
+		}
+	)*
+	{ 
+		return dibujo;
+	/*
+	|<ABREETI><CIRCULO><CIERRAETI>Atributos()<ABREETI><CIERRA><CIRCULO><CIERRAETI>
+	|<ABREETI><LINEA><CIERRAETI>Atributos()<ABREETI><CIERRA><LINEA><CIERRAETI>
+	|<ABREETI><CABECERA><CIERRAETI>Atributos()<ABREETI><CIERRA><CABECERA><CIERRAETI>
+	|<ABREETI><TEXTO><CIERRAETI>Atributos()<ABREETI><CIERRA><TEXTO><CIERRAETI> */
+	}
+}	
+void Atributos(Dibujable d):
+{
+	Token t;
+}
+{     
+	(
+		<ABREETI><ALTO><CIERRAETI>
+			t=<NUMBER>  { d.setAlto( Integer.parseInt(t.toString()) ); }
+		<ABREETI><CIERRA><ALTO><CIERRAETI> 
+		|<ABREETI><ANCHO><CIERRAETI>
+			t=<NUMBER>  { d.setAncho( Integer.parseInt(t.toString()) );}
+		<ABREETI><CIERRA><ANCHO><CIERRAETI>
+		|<ABREETI><POSICION><POSX><CIERRAETI>
+			t=<NUMBER>  { d.setX( Integer.parseInt(t.toString())); }
+		<ABREETI><CIERRA><POSICION><POSX><CIERRAETI>
+		|<ABREETI><POSICION><POSY><CIERRAETI>
+			t=<NUMBER>  { d.setY( Integer.parseInt(t.toString())); }
+		<ABREETI><CIERRA><POSICION><POSY><CIERRAETI>
+		|<ABREETI><COLOR><CIERRAETI>
+			t=<TEXT>  { d.setColor( t.toString() );}
+		<ABREETI><CIERRA><COLOR><CIERRAETI>
+		
+		|<ABREETI><RADIO><CIERRAETI>
+			<NUMBER>
+		<ABREETI><CIERRA><RADIO><CIERRAETI> { /*if( ! d instanceof Circulo )*/ System.out.println("Se encontro una etiqueta de radio en un rectangulo, sera ignorada"); }
+		|<ABREETI><TAM><CIERRAETI><NUMBER><ABREETI><CIERRA><TAM><CIERRAETI> {System.out.println("Se encontro una etiqueta de tamaño en un rectangulo, sera ignorada"); }
+		|<ABREETI><FONDO><CIERRAETI><TEXT><ABREETI><CIERRA><FONDO><CIERRAETI> {System.out.println("Se encontro una etiqueta de fondo en un rectangulo, sera ignorada"); }
+		|<ABREETI><FUENTE><CIERRAETI><TEXT><ABREETI><CIERRA><FUENTE><CIERRAETI>{System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada"); }
+		|<ABREETI><TIPO><CIERRAETI><TEXT><ABREETI><CIERRA><TIPO><CIERRAETI> 
+	)+ 
+}

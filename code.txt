@@ -1,0 +1,8 @@
+<dibujo>
+	<rectangulo>
+		<alto>100</alto>
+		<ancho>200</ancho>
+		<fondo>no</fondo>
+		<color>azul</color>
+	</rectangulo>
+</dibujo>
