@@ -57,16 +57,3 @@ public class CompiladorDibujos {
     }
     
 }
-
-class PanelDibujo extends JPanel{
-    Dibujo dibujo;
-    public PanelDibujo(Dibujo dib){
-        dibujo=dib;
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g); 
-        dibujo.dibujar(g);
-    }        
-}

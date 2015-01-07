@@ -6,7 +6,7 @@ options {
 
 PARSER_BEGIN(text)
 package compiladordibujos;
-class text {
+public class text {
 	public static void main(String args[])throws ParseException{
 		try{
 			text analizador =new text(System.in);
