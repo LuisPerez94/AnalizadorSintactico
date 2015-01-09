@@ -29,7 +29,7 @@ TOKEN :
 	| <RECTANGULO  :"rectangulo">{System.out.println("RECTANGULO -> "+image);}
 	| <CIRCULO :"circulo">{System.out.println("CIRCULO -> "+image);}
 	| <LINEA : "linea">{System.out.println("LINEA-> "+image); }
-	| <TEXTO : "texto">{/*System.out.println("TEXTO -> "+image);*/}
+	| <TEXTO : "texto" | "."| "," >{/*System.out.println("TEXTO -> "+image);*/}
 	| <ALTO : "alto">{/*System.out.println("ALTO -> "+image);*/}
 	| <ANCHO : "ancho">{/*System.out.println("ANCHO -> "+image);*/}
 	| <COLOR : "color">{/*System.out.println("COLOR -> "+image);*/}
@@ -39,6 +39,7 @@ TOKEN :
 	| <TIPO : "tipo">{/*System.out.println("TIPO -> "+image);*/}
 	| <FUENTE :"fuente">{/*System.out.println("FUENTE -> "+image);*/}
 	| <TAM: "tam">{/*System.out.println("TAM -> "+image);*/}
+	| <CADENA: "cadena">
 }
 TOKEN :
 {
@@ -98,12 +99,19 @@ Dibujo Principal(Dibujo dibujo) :
 			System.out.println("Se encontro una linea");
 			dibujo.agregarDibujable(lin);
 		}
+
+
+
+               |<ABREETI><TEXTO><CIERRAETI>{Texto texto=new Texto();}
+                            Atributos(texto)
+                        <ABREETI><CIERRA><TEXTO><CIERRAETI>{
+                         System.out.println("Se encontro un TEXTO");
+			dibujo.agregarDibujable(texto);
+                }
 	)*
 	{ 
 		return dibujo;
-	/*
 	
-	|<ABREETI><TEXTO><CIERRAETI>Atributos()<ABREETI><CIERRA><TEXTO><CIERRAETI> */
 	}
 }	
 void Atributos(Dibujable d):
@@ -156,9 +164,13 @@ void Atributos(Dibujable d):
 		<ABREETI><CIERRA><POSICION><POSY2><CIERRAETI>
 		|<ABREETI><TAM><CIERRAETI>
 			t=<NUMBER> {
-				//if(d instanceof Texto)
+				if(d instanceof Texto){
+					((Texto)d).setTam(Integer.parseInt(t.toString()));
+                }else {
+					System.out.println("Se encontro la etiqueta tam en un objeto que no es texto, sera ignorada");
+				}
 			}
-		<ABREETI><CIERRA><TAM><CIERRAETI> {System.out.println("Se encontro una etiqueta de tamaño en un objeto que no es texto, sera ignorada"); }
+		<ABREETI><CIERRA><TAM><CIERRAETI> 
 		|<ABREETI><FONDO><CIERRAETI>
 			t=<TEXT> {
 				boolean f= (t.toString().equals("si") || t.toString().equals("1")) ? true: false;
@@ -172,9 +184,33 @@ void Atributos(Dibujable d):
 			}
 		<ABREETI><CIERRA><FONDO><CIERRAETI> 
 		|<ABREETI><FUENTE><CIERRAETI>
-			cad= cadena() { }
-		<ABREETI><CIERRA><FUENTE><CIERRAETI>{System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada"); }
-		|<ABREETI><TIPO><CIERRAETI><TEXT><ABREETI><CIERRA><TIPO><CIERRAETI> 
+			cad= cadena() { 
+				if(d instanceof Texto){
+					((Texto)d).setFuente(cad);
+                }else {
+					System.out.println("Se encontro la etiqueta fuente en un objeto que no es texto, sera ignorada");
+				}
+			
+			}
+		<ABREETI><CIERRA><FUENTE><CIERRAETI>
+		|<ABREETI><TIPO><CIERRAETI>
+			cad= cadena(){
+				if(d instanceof Texto){
+					((Texto)d).setTipo(cad);
+                }else {
+					System.out.println("Se encontro la etiqueta tipo en un objeto que no es texto, sera ignorada");
+				}
+			}
+		<ABREETI><CIERRA><TIPO><CIERRAETI> 
+		| <ABREETI><CADENA><CIERRAETI>
+			cad= cadena(){
+				if(d instanceof Texto){
+					((Texto)d).setTexto(cad);
+                }else {
+					System.out.println("Se encontro la etiqueta cadena en un objeto que no es texto, sera ignorada");
+				}
+			}
+		<ABREETI><CIERRA><CADENA><CIERRAETI> 
 	)+ 
 }
 void Cabecera(Dibujo d):
@@ -198,12 +234,13 @@ void Cabecera(Dibujo d):
 String cadena():
 {
 	StringBuilder cad= new StringBuilder();
-	Token t;
+	Token t= new Token(1,"");
 }
 {
 	(
 		t=<TEXT> { cad.append(t.toString()).append(" "); }
-	)*
+		| ":" (t=<TEXT>)*{ cad.append(":").append(t.toString()+" "); }
+	)* 
 	{ 
 		if(cad.length()>0)
 			cad.deleteCharAt(cad.length()-1);

@@ -88,16 +88,24 @@ Linea lin= new Linea();
         jj_consume_token(CIERRAETI);
 System.out.println("Se encontro una linea");
                         dibujo.agregarDibujable(lin);
+      } else if (jj_2_6(3)) {
+        jj_consume_token(ABREETI);
+        jj_consume_token(TEXTO);
+        jj_consume_token(CIERRAETI);
+Texto texto=new Texto();
+        Atributos(texto);
+        jj_consume_token(ABREETI);
+        jj_consume_token(CIERRA);
+        jj_consume_token(TEXTO);
+        jj_consume_token(CIERRAETI);
+System.out.println("Se encontro un TEXTO");
+                        dibujo.agregarDibujable(texto);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
       }
     }
 {if ("" != null) return dibujo;}
-        /*
-	
-	|<ABREETI><TEXTO><CIERRAETI>Atributos()<ABREETI><CIERRA><TEXTO><CIERRAETI> */
-
     throw new Error("Missing return statement in function");
   }
 
@@ -105,7 +113,7 @@ System.out.println("Se encontro una linea");
         String cad;
     label_3:
     while (true) {
-      if (jj_2_6(3)) {
+      if (jj_2_7(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
@@ -115,7 +123,7 @@ d.setAlto( Integer.parseInt(t.toString()) );
         jj_consume_token(CIERRA);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_7(3)) {
+      } else if (jj_2_8(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
@@ -125,7 +133,7 @@ d.setAncho( Integer.parseInt(t.toString()) );
         jj_consume_token(CIERRA);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_8(3)) {
+      } else if (jj_2_9(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSX);
@@ -137,7 +145,7 @@ d.setX( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSX);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_9(3)) {
+      } else if (jj_2_10(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSY);
@@ -149,7 +157,7 @@ d.setY( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSY);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_10(3)) {
+      } else if (jj_2_11(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(COLOR);
         jj_consume_token(CIERRAETI);
@@ -159,7 +167,7 @@ d.setColor(cad); System.out.println("Se asigno el color " +cad);
         jj_consume_token(CIERRA);
         jj_consume_token(COLOR);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_11(3)) {
+      } else if (jj_2_12(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(RADIO);
         jj_consume_token(CIERRAETI);
@@ -171,7 +179,7 @@ if( d instanceof Circulo ){
         jj_consume_token(CIERRA);
         jj_consume_token(RADIO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_12(3)) {
+      } else if (jj_2_13(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSX2);
@@ -184,7 +192,7 @@ d.setAncho( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSX2);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_13(3)) {
+      } else if (jj_2_14(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(POSICION);
         jj_consume_token(POSY2);
@@ -197,18 +205,21 @@ d.setAlto( Integer.parseInt(t.toString()));
         jj_consume_token(POSICION);
         jj_consume_token(POSY2);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_14(3)) {
+      } else if (jj_2_15(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(TAM);
         jj_consume_token(CIERRAETI);
         t = jj_consume_token(NUMBER);
-
+if(d instanceof Texto){
+                                        ((Texto)d).setTam(Integer.parseInt(t.toString()));
+                }else {
+                                        System.out.println("Se encontro la etiqueta tam en un objeto que no es texto, sera ignorada");
+                                }
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(TAM);
         jj_consume_token(CIERRAETI);
-System.out.println("Se encontro una etiqueta de tama\u00c3\u00b1o en un objeto que no es texto, sera ignorada");
-      } else if (jj_2_15(3)) {
+      } else if (jj_2_16(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(FONDO);
         jj_consume_token(CIERRAETI);
@@ -225,31 +236,53 @@ boolean f= (t.toString().equals("si") || t.toString().equals("1")) ? true: false
         jj_consume_token(CIERRA);
         jj_consume_token(FONDO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_16(3)) {
+      } else if (jj_2_17(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(FUENTE);
         jj_consume_token(CIERRAETI);
         cad = cadena();
-
+if(d instanceof Texto){
+                                        ((Texto)d).setFuente(cad);
+                }else {
+                                        System.out.println("Se encontro la etiqueta fuente en un objeto que no es texto, sera ignorada");
+                                }
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(FUENTE);
         jj_consume_token(CIERRAETI);
-System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ignorada");
-      } else if (jj_2_17(3)) {
+      } else if (jj_2_18(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(TIPO);
         jj_consume_token(CIERRAETI);
-        jj_consume_token(TEXT);
+        cad = cadena();
+if(d instanceof Texto){
+                                        ((Texto)d).setTipo(cad);
+                }else {
+                                        System.out.println("Se encontro la etiqueta tipo en un objeto que no es texto, sera ignorada");
+                                }
         jj_consume_token(ABREETI);
         jj_consume_token(CIERRA);
         jj_consume_token(TIPO);
+        jj_consume_token(CIERRAETI);
+      } else if (jj_2_19(3)) {
+        jj_consume_token(ABREETI);
+        jj_consume_token(CADENA);
+        jj_consume_token(CIERRAETI);
+        cad = cadena();
+if(d instanceof Texto){
+                                        ((Texto)d).setTexto(cad);
+                }else {
+                                        System.out.println("Se encontro la etiqueta cadena en un objeto que no es texto, sera ignorada");
+                                }
+        jj_consume_token(ABREETI);
+        jj_consume_token(CIERRA);
+        jj_consume_token(CADENA);
         jj_consume_token(CIERRAETI);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      if (jj_2_18(3)) {
+      if (jj_2_20(3)) {
         ;
       } else {
         break label_3;
@@ -261,12 +294,12 @@ System.out.println("Se encontro una etiqueta de fuente en un rectangulo, sera ig
         String f;
     label_4:
     while (true) {
-      if (jj_2_19(3)) {
+      if (jj_2_21(3)) {
         ;
       } else {
         break label_4;
       }
-      if (jj_2_20(3)) {
+      if (jj_2_22(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
@@ -276,7 +309,7 @@ d.setAlto(Integer.parseInt(t.toString()));
         jj_consume_token(CIERRA);
         jj_consume_token(ALTO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_21(3)) {
+      } else if (jj_2_23(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
@@ -286,7 +319,7 @@ d.setAncho(Integer.parseInt(t.toString()));
         jj_consume_token(CIERRA);
         jj_consume_token(ANCHO);
         jj_consume_token(CIERRAETI);
-      } else if (jj_2_22(3)) {
+      } else if (jj_2_24(3)) {
         jj_consume_token(ABREETI);
         jj_consume_token(FONDO);
         jj_consume_token(CIERRAETI);
@@ -304,16 +337,33 @@ d.setFondo(f);
   }
 
   static final public String cadena() throws ParseException {StringBuilder cad= new StringBuilder();
-        Token t;
+        Token t= new Token(1,"");
     label_5:
     while (true) {
-      if (jj_2_23(3)) {
+      if (jj_2_25(3)) {
         ;
       } else {
         break label_5;
       }
-      t = jj_consume_token(TEXT);
+      if (jj_2_27(3)) {
+        t = jj_consume_token(TEXT);
 cad.append(t.toString()).append(" ");
+      } else if (jj_2_28(3)) {
+        jj_consume_token(30);
+        label_6:
+        while (true) {
+          if (jj_2_26(3)) {
+            ;
+          } else {
+            break label_6;
+          }
+          t = jj_consume_token(TEXT);
+        }
+cad.append(":").append(t.toString()+" ");
+      } else {
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     }
 if(cad.length()>0)
                         cad.deleteCharAt(cad.length()-1);
@@ -505,7 +555,185 @@ if(cad.length()>0)
     finally { jj_save(22, xla); }
   }
 
-  static private boolean jj_3_7()
+  static private boolean jj_2_24(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_24(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(23, xla); }
+  }
+
+  static private boolean jj_2_25(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_25(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(24, xla); }
+  }
+
+  static private boolean jj_2_26(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_26(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(25, xla); }
+  }
+
+  static private boolean jj_2_27(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_27(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(26, xla); }
+  }
+
+  static private boolean jj_2_28(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_28(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(27, xla); }
+  }
+
+  static private boolean jj_3_15()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(TAM)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_19()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(CADENA)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_14()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSY2)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_26()
+ {
+    if (jj_scan_token(TEXT)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_13()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSX2)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_6()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(TEXTO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_28()
+ {
+    if (jj_scan_token(30)) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_26()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_18()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(TIPO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_27()
+ {
+    if (jj_scan_token(TEXT)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_25()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_27()) {
+    jj_scanpos = xsp;
+    if (jj_3_28()) return true;
+    }
+    return false;
+  }
+
+  static private boolean jj_3_12()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(RADIO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_5()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(LINEA)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_11()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(COLOR)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_17()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(FUENTE)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_4()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(CIRCULO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_10()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSY)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_24()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(FONDO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_23()
  {
     if (jj_scan_token(ABREETI)) return true;
     if (jj_scan_token(ANCHO)) return true;
@@ -513,12 +741,89 @@ if(cad.length()>0)
     return false;
   }
 
-  static private boolean jj_3_18()
+  static private boolean jj_3_9()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(POSICION)) return true;
+    if (jj_scan_token(POSX)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_3()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(RECTANGULO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_2()
  {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_6()) {
+    if (jj_3_3()) {
     jj_scanpos = xsp;
+    if (jj_3_4()) {
+    jj_scanpos = xsp;
+    if (jj_3_5()) {
+    jj_scanpos = xsp;
+    if (jj_3_6()) return true;
+    }
+    }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_22()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(ALTO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_21()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_22()) {
+    jj_scanpos = xsp;
+    if (jj_3_23()) {
+    jj_scanpos = xsp;
+    if (jj_3_24()) return true;
+    }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_8()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(ANCHO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_16()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(FONDO)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_1()
+ {
+    if (jj_scan_token(ABREETI)) return true;
+    if (jj_scan_token(CABECERA)) return true;
+    if (jj_scan_token(CIERRAETI)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_20()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
     if (jj_3_7()) {
     jj_scanpos = xsp;
     if (jj_3_8()) {
@@ -539,7 +844,12 @@ if(cad.length()>0)
     jj_scanpos = xsp;
     if (jj_3_16()) {
     jj_scanpos = xsp;
-    if (jj_3_17()) return true;
+    if (jj_3_17()) {
+    jj_scanpos = xsp;
+    if (jj_3_18()) {
+    jj_scanpos = xsp;
+    if (jj_3_19()) return true;
+    }
     }
     }
     }
@@ -554,181 +864,11 @@ if(cad.length()>0)
     return false;
   }
 
-  static private boolean jj_3_6()
+  static private boolean jj_3_7()
  {
     if (jj_scan_token(ABREETI)) return true;
     if (jj_scan_token(ALTO)) return true;
     if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_15()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(FONDO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_23()
- {
-    if (jj_scan_token(TEXT)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_14()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(TAM)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_13()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
-    if (jj_scan_token(POSY2)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_22()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(FONDO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_12()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
-    if (jj_scan_token(POSX2)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_21()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(ANCHO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_5()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(LINEA)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_20()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(ALTO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_20()) {
-    jj_scanpos = xsp;
-    if (jj_3_21()) {
-    jj_scanpos = xsp;
-    if (jj_3_22()) return true;
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3_4()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(CIRCULO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_11()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(RADIO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_10()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(COLOR)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_17()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(TIPO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_3()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(RECTANGULO)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_2()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_3()) {
-    jj_scanpos = xsp;
-    if (jj_3_4()) {
-    jj_scanpos = xsp;
-    if (jj_3_5()) return true;
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3_9()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
-    if (jj_scan_token(POSY)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_16()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(FUENTE)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_1()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(CABECERA)) return true;
-    if (jj_scan_token(CIERRAETI)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_8()
- {
-    if (jj_scan_token(ABREETI)) return true;
-    if (jj_scan_token(POSICION)) return true;
-    if (jj_scan_token(POSX)) return true;
     return false;
   }
 
@@ -752,7 +892,7 @@ if(cad.length()>0)
    private static void jj_la1_init_0() {
       jj_la1_0 = new int[] {};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[23];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[28];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -953,7 +1093,7 @@ if(cad.length()>0)
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[29];
+    boolean[] la1tokens = new boolean[31];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -967,7 +1107,7 @@ if(cad.length()>0)
         }
       }
     }
-    for (int i = 0; i < 29; i++) {
+    for (int i = 0; i < 31; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -994,7 +1134,7 @@ if(cad.length()>0)
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 23; i++) {
+    for (int i = 0; i < 28; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1024,6 +1164,11 @@ if(cad.length()>0)
             case 20: jj_3_21(); break;
             case 21: jj_3_22(); break;
             case 22: jj_3_23(); break;
+            case 23: jj_3_24(); break;
+            case 24: jj_3_25(); break;
+            case 25: jj_3_26(); break;
+            case 26: jj_3_27(); break;
+            case 27: jj_3_28(); break;
           }
         }
         p = p.next;

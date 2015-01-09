@@ -41,23 +41,25 @@ public interface textConstants {
   /** RegularExpression Id. */
   int TAM = 15;
   /** RegularExpression Id. */
-  int ABREETI = 16;
+  int CADENA = 16;
   /** RegularExpression Id. */
-  int CIERRAETI = 17;
+  int ABREETI = 17;
   /** RegularExpression Id. */
-  int CIERRA = 18;
+  int CIERRAETI = 18;
   /** RegularExpression Id. */
-  int POSX = 19;
+  int CIERRA = 19;
   /** RegularExpression Id. */
-  int POSY = 20;
+  int POSX = 20;
   /** RegularExpression Id. */
-  int POSX2 = 21;
+  int POSY = 21;
   /** RegularExpression Id. */
-  int POSY2 = 22;
+  int POSX2 = 22;
   /** RegularExpression Id. */
-  int NUMBER = 23;
+  int POSY2 = 23;
   /** RegularExpression Id. */
-  int TEXT = 24;
+  int NUMBER = 24;
+  /** RegularExpression Id. */
+  int TEXT = 25;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -70,7 +72,7 @@ public interface textConstants {
     "\"rectangulo\"",
     "\"circulo\"",
     "\"linea\"",
-    "\"texto\"",
+    "<TEXTO>",
     "\"alto\"",
     "\"ancho\"",
     "\"color\"",
@@ -80,6 +82,7 @@ public interface textConstants {
     "\"tipo\"",
     "\"fuente\"",
     "\"tam\"",
+    "\"cadena\"",
     "\"<\"",
     "\">\"",
     "\"/\"",
@@ -93,6 +96,7 @@ public interface textConstants {
     "\"\\r\"",
     "\"\\t\"",
     "\"\\n\"",
+    "\":\"",
   };
 
 }
