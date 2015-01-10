@@ -7,6 +7,14 @@ options {
 PARSER_BEGIN(text)
 package compiladordibujos;
 public class text {
+	public static StringBuilder errores;
+	public static void error(ParseException ex){
+		errores.append("Error de sintaxis en el token: "+ ex.currentToken +
+                    " en linea: " + ex.currentToken.beginLine + " columna: " +ex.currentToken.beginColumn +" me saltare a la siguiente etiqueta\n");
+		while(!token.image.equals(">")){
+			getNextToken();
+		}
+	}
 	public static void main(String args[])throws ParseException{
 		try{
 			text analizador =new text(System.in);
@@ -64,6 +72,7 @@ SKIP : {
 Dibujo Programa () :
 {
 	Dibujo dibujo=new Dibujo();
+	errores= new StringBuilder();
 }
 {
 	<ABREETI><MAIN><CIERRAETI>
@@ -121,6 +130,7 @@ void Atributos(Dibujable d):
 }
 {     
 	(
+	try{
 		<ABREETI><ALTO><CIERRAETI>
 			t=<NUMBER>  { d.setAlto( Integer.parseInt(t.toString()) ); }
 		<ABREETI><CIERRA><ALTO><CIERRAETI> 
@@ -211,6 +221,9 @@ void Atributos(Dibujable d):
 				}
 			}
 		<ABREETI><CIERRA><CADENA><CIERRAETI> 
+	}catch(ParseException ex){
+			error(ex);
+	}
 	)+ 
 }
 void Cabecera(Dibujo d):
@@ -220,15 +233,19 @@ void Cabecera(Dibujo d):
 }
 {
 	(
-		<ABREETI><ALTO><CIERRAETI>
-			t=<NUMBER> {d.setAlto(Integer.parseInt(t.toString())); }
-		<ABREETI><CIERRA><ALTO><CIERRAETI>
-		|<ABREETI><ANCHO><CIERRAETI>
-			t=<NUMBER>{d.setAncho(Integer.parseInt(t.toString())); }
-		<ABREETI><CIERRA><ANCHO><CIERRAETI>
-		|<ABREETI><FONDO><CIERRAETI>
-			f=cadena() { d.setFondo(f); }
-		<ABREETI><CIERRA><FONDO><CIERRAETI>
+		try{
+			<ABREETI><ALTO><CIERRAETI>
+				t=<NUMBER> {d.setAlto(Integer.parseInt(t.toString())); }
+			<ABREETI><CIERRA><ALTO><CIERRAETI>
+			|<ABREETI><ANCHO><CIERRAETI>
+				t=<NUMBER>{d.setAncho(Integer.parseInt(t.toString())); }
+			<ABREETI><CIERRA><ANCHO><CIERRAETI>
+			|<ABREETI><FONDO><CIERRAETI>
+				f=cadena() { d.setFondo(f); }
+			<ABREETI><CIERRA><FONDO><CIERRAETI>
+		}catch(ParseException ex){
+			error(ex);
+		}
 	)*
 }
 String cadena():

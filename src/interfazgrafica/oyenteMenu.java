@@ -147,6 +147,7 @@ class oyenteMenu implements ActionListener {
 
     private void compilar() {
         try {
+            consola.setText("");
             if(f==null)
                 f = new JFrame("Dibujo");
             else f.setVisible(false);
@@ -164,9 +165,14 @@ class oyenteMenu implements ActionListener {
                 f.add(panelDib);
             }else panelDib.setDibujo(dib);
             
+            if(analizador.errores.length()>0){
+                System.out.println("errores ");
+                consola.append(analizador.errores.toString());
+                analizador.errores.delete(0, analizador.errores.length());
+            }else consola.setText("Dibujo compilado correctamente\n");
             f.setVisible(true);
             
-            consola.setText("Dibujo compilado correctamente\n");
+            
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(oyenteMenu.class.getName()).log(Level.SEVERE, null, ex);
             consola.append("No se encontro el archivo: " + archivoAct +"\n");
@@ -175,8 +181,10 @@ class oyenteMenu implements ActionListener {
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
         } catch (ParseException ex) {
             //Logger.getLogger(oyenteMenu.class.getName()).log(Level.SEVERE, null, ex);
+            
             consola.append("Error de sintaxis en el token: "+ ex.currentToken +
                     " en linea: " + ex.currentToken.beginLine + " columna: " +ex.currentToken.beginColumn +"\n");
+            
             ex.printStackTrace();
             
         } catch(TokenMgrError ex){
