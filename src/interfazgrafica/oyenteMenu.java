@@ -174,19 +174,13 @@ class oyenteMenu implements ActionListener {
             
             
         } catch (FileNotFoundException ex) {
-            //Logger.getLogger(oyenteMenu.class.getName()).log(Level.SEVERE, null, ex);
             consola.append("No se encontro el archivo: " + archivoAct +"\n");
             JOptionPane.showMessageDialog(null,
                     "No se encontro el archivo",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
         } catch (ParseException ex) {
-            //Logger.getLogger(oyenteMenu.class.getName()).log(Level.SEVERE, null, ex);
-            
             consola.append("Error de sintaxis en el token: "+ ex.currentToken +
                     " en linea: " + ex.currentToken.beginLine + " columna: " +ex.currentToken.beginColumn +"\n");
-            
-            ex.printStackTrace();
-            
         } catch(TokenMgrError ex){
             consola.append("Error lexico: " +ex.toString() +"\n");
         }
