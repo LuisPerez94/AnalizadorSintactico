@@ -10,17 +10,17 @@ public class text implements textConstants {
                         getNextToken();
                 }
         }
-        public static void main(String args[])throws ParseException{
-                try{
-                        text analizador =new text(System.in);
-                        analizador.Programa();
-                        System.out.println("Se a compilado Correctamente");
-
-                }catch(ParseException e){
-                        System.out.println(e.getMessage());
-                        System.out.println("Ha Ocurrido un error");
-                }
-        }
+//        public static void main(String args[])throws ParseException{
+//                try{
+//                        text analizador =new text(System.in);
+//                        analizador.Programa();
+//                        System.out.println("Se a compilado Correctamente");
+//
+//                }catch(ParseException e){
+//                        System.out.println(e.getMessage());
+//                        System.out.println("Ha Ocurrido un error");
+//                }
+//        }
 
   static final public Dibujo Programa() throws ParseException {Dibujo dibujo=new Dibujo();
         errores= new StringBuilder();

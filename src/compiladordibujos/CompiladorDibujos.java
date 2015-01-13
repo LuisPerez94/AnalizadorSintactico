@@ -28,32 +28,32 @@ public class CompiladorDibujos {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException{
-        JFrame f = new JFrame("Dibujo");
-        f.setLocation(20, 20);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        PanelDibujo panel;
-        
-        try {
-            /*
-            FileWriter prub= new FileWriter("prueba2.txt");
-            prub.append("hola");
-            prub.close();
-            */
-            
-            text analizador= new text(new InputStreamReader(new FileInputStream("code.txt")));
-            Dibujo dib=analizador.Programa();
-            f.setSize(dib.getAncho(), dib.getAlto());
-            panel= new PanelDibujo(dib);
-            f.add(panel);    
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CompiladorDibujos.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error: " + ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(CompiladorDibujos.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error: " + ex);
-        }
-        f.setVisible(true);
-    }
+//    public static void main(String[] args) throws IOException{
+//        JFrame f = new JFrame("Dibujo");
+//        f.setLocation(20, 20);
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        PanelDibujo panel;
+//        
+//        try {
+//            /*
+//            FileWriter prub= new FileWriter("prueba2.txt");
+//            prub.append("hola");
+//            prub.close();
+//            */
+//            
+//            text analizador= new text(new InputStreamReader(new FileInputStream("code.txt")));
+//            Dibujo dib=analizador.Programa();
+//            f.setSize(dib.getAncho(), dib.getAlto());
+//            panel= new PanelDibujo(dib);
+//            f.add(panel);    
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(CompiladorDibujos.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println("error: " + ex);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CompiladorDibujos.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println("error: " + ex);
+//        }
+//        f.setVisible(true);
+//    }
     
 }
